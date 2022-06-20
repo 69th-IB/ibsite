@@ -1,0 +1,11 @@
+<p>
+  <%= link_to 'Back', missions_path %>
+</p>
+
+<h2><%= @mission.title %></h2>
+
+<p>
+  <%= @mission.description %>
+</p>
+
+<%= render :partial => 'squads', :locals => { :squads => @mission.root_squads } %>

@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  start: 2022-06-20 20:17:05
+  creator: one
+  published: false
+  public: false
+
+two:
+  title: MyString
+  start: 2022-06-20 20:17:05
+  creator: two
+  published: false
+  public: false
