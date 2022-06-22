@@ -4,7 +4,7 @@ class MissionsController < ApplicationController
   end
 
   def show
-    @mission = Mission.find(params[:id])
+    @mission = Mission.includes(:squads, :slots).find(params[:id])
 
     return render 'not_found', status: 404 if @mission.nil?
   end
