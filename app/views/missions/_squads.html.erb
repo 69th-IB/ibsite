@@ -5,7 +5,10 @@
 
       <ul class="slots">
         <% for slot in squad.slots %>
-          <li class="slot"><%= slot.name %></li>
+          <li class="slot">
+            <div class="role"><%= slot.name %></div>
+            <div class="player"><%= slot.user&.display_name %></div>
+          </li>
         <% end %>
       </ul>
 

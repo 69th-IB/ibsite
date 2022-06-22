@@ -29,4 +29,8 @@ class User < ApplicationRecord
       user.discord_accent_color = rand(0xffffff)
     end
   end
+
+  def display_name
+    discord_name
+  end
 end

@@ -1,0 +1,39 @@
+.squad-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: start;
+  margin: 0 auto;
+  max-width: 100%;
+}
+
+.squad {
+  border: 2px solid brown;
+  padding: 10px;
+  // padding-left: 20px;
+  margin: 36px 12px 0;
+  text-align: center;
+}
+
+.slots {
+  display: block;
+  width: 240px;
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.slot {
+  padding: 4px;
+  border: 1px solid rgb(54, 42, 165);
+  margin-bottom: -1px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}

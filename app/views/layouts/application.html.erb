@@ -11,6 +11,51 @@
   </head>
 
   <body>
-    <%= yield %>
+    <header>
+      <div class="header-inner">
+        <a href="/" class="title-container">
+          <div class="title">69th Idiot Battalion</div>
+          <div class="subtitle">SIT NOMINE DIGNA</div>
+        </a>
+
+        <nav>
+          <ul>
+            <li><%= link_to "Home", root_path %></li>
+            <li><%= link_to "Missions", missions_path %></li>
+
+            <li class="separator"></li>
+
+            <% if user_signed_in? %>
+              <li class="account">
+                <%= link_to "/" do %>
+                  <%= image_tag current_user.discord_avatar_url %>
+                  <%= current_user.display_name %>
+                <% end %>
+              </li>
+            <% else %>
+              <li class="login">
+                <%= button_to "Sign in with Discord",
+                  user_discord_omniauth_authorize_path,
+                  data: { turbo: false } %>
+              </li>
+
+              <% if Rails.env.development? %>
+                <li class="login-dev">
+                  <%= button_to "Sign in with Developer",
+                    user_developer_omniauth_authorize_path,
+                    data: { turbo: false } %>
+                </li>
+              <% end %>
+            <% end %>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <%= yield %>
+    </main>
+
+    <footer></footer>
   </body>
 </html>
