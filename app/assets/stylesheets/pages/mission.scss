@@ -1,3 +1,27 @@
+.mission {
+  display: block;
+  text-decoration: none;
+  padding: 12px 24px;
+  background-color: #126341;
+  border: 1px solid rgba(white, 0.3);
+  border-radius: 4px;
+  margin-bottom: 12px;
+
+  transition: all 0.06s ease-in-out;
+
+  &:hover {
+    border-color: rgba(white, 0.8);
+  }
+
+  .mission-title {
+    display: block;
+  }
+
+  .mission-start {
+    display: block;
+  }
+}
+
 .squad-list {
   display: flex;
   flex-direction: row;

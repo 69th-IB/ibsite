@@ -1,11 +1,49 @@
-<h1>Missions#index</h1>
+<h1>Missions</h1>
 
 <% if @missions.empty? %>
   <p>No missions found.</p>
 <% else %>
-  <ul>
-    <% @missions.each do |mission| %>
-    <li><%= link_to mission.title, mission %></li>
+  <% @missions.each do |mission| %>
+    <%= link_to mission, class: "mission" do %>
+      <%= tag.span mission.title,
+          class: "mission-title" %>
+
+      <%= tag.datetime mission.start.strftime("%A %d %B, %H:%M %Z"),
+          datetime: mission.start.iso8601,
+          class: "mission-start" %>
     <% end %>
-  </ul>
+  <% end %>
 <% end %>
+
+<%#
+  ideas for layout:
+
+  This Sunday:
+    [ MISSION ]
+
+  Next Saturday:
+    [ MISSION ]
+
+  Next Sunday:
+    [ MISSION ]
+
+  - - -
+
+  Archive:
+    [ MISSION ]
+    [ MISSION ]
+    [ MISSION ]
+
+  different templates for planned missions vs. past missions (focus on attendance vs focus on media)
+
+  planned:
+  | IMAGE   Operation Foo               27/32 |
+  | IMAGE   Sunday 22:00 CEST                 |
+
+  archive: (grid/gallery?)
+  |   I M A G E    |
+  |   I M A G E    |
+  |                |
+  |  Opeation Bar  |
+
+%>
