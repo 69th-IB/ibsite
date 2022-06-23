@@ -6,10 +6,15 @@ Rails.application.routes.draw do
   devise_for :user,
     skip: [:sessions, :registrations],
     controllers: {
-      omniauth_callbacks: "users/omniauth_callbacks",
+      omniauth_callbacks: "user/omniauth_callbacks",
     }
 
-  namespace :users do
+  devise_scope :user do
+    delete "sign_out", to: "user/sessions#destroy"
+  end
+
+  namespace :user do
+    get 'settings/index'
     get 'omniauth_callbacks/discord'
     get 'omniauth_callbacks/steam'
   end

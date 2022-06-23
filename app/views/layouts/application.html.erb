@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Ibsite</title>
+    <title>69th Idiot Battalion</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -29,15 +29,23 @@
               <li class="account">
                 <%= link_to "/" do %>
                   <%= image_tag current_user.discord_avatar_url %>
-                  <%= current_user.display_name %>
+                  <%= tag.span current_user.display_name, class: "username" %>
                 <% end %>
+
+                <ul class="account-menu">
+                  <li class="sign-out">
+                    <%= link_to "Sign out", sign_out_path, data: { turbo_method: :delete } %>
+                  </li>
+                </ul>
               </li>
             <% else %>
-              <li class="login">
-                <%= button_to "Sign in with Discord",
-                  user_discord_omniauth_authorize_path,
-                  data: { turbo: false } %>
-              </li>
+              <% if Rails.env.production? or Rails.application.credentials.discord %>
+                <li class="login">
+                  <%= button_to "Sign in with Discord",
+                    user_discord_omniauth_authorize_path,
+                    data: { turbo: false } %>
+                </li>
+              <% end %>
 
               <% if Rails.env.development? %>
                 <li class="login-dev">

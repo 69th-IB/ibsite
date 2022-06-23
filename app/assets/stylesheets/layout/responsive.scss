@@ -1,4 +1,5 @@
-@mixin main-content-width {
-  width: 1400px;
+@mixin main-content-width($padding: 0) {
+  width: 1400px - $padding * 2;
   margin: 0 auto;
+  padding: 0 $padding;
 }
