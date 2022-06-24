@@ -4,4 +4,8 @@
   <%= @mission.description %>
 </p>
 
-<%= render :partial => 'squads', :locals => { :squads => @mission.root_squads } %>
+<%= turbo_stream_from @mission, :squads %>
+
+<div class="squad-list">
+  <%= render @mission.root_squads %>
+</div>

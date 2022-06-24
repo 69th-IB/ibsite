@@ -4,4 +4,6 @@ class Squad < ApplicationRecord
 
   has_many :slots, dependent: :destroy
   has_many :children, class_name: "Squad", foreign_key: :parent_id, dependent: :destroy
+
+  broadcasts_to ->(squad) { [ squad.mission, :squads ] }
 end
