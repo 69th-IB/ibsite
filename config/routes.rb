@@ -19,5 +19,5 @@ Rails.application.routes.draw do
     get 'omniauth_callbacks/steam'
   end
 
-  resources :missions, only: [:index, :show]
+  resources :missions
 end

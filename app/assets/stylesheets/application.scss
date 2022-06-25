@@ -42,3 +42,21 @@ a:link, a:visited {
 a:hover {
   color: #ffc107;
 }
+
+input[type="text"] {
+  background: black;
+  border: 1px solid rgba(white, 0.6);
+  border-radius: 2px;
+  color: white;
+  padding: 6px 8px;
+  outline: none;
+
+  &:focus {
+    border: 1px solid white;
+  }
+}
+
+h3 {
+  margin-top: 16px;
+  margin-bottom: 4px;
+}

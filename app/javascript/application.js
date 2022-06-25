@@ -6,4 +6,4 @@ import "@rails/actiontext"
 
 import jstz from "jstz";
 const time_zone = jstz.determine();
-document.cookie = "time_zone=" + time_zone.name() + "; SameSite=Strict; Secure";
+document.cookie = "time_zone=" + time_zone.name() + "; Path=/; SameSite=Strict; Secure";

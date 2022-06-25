@@ -29,4 +29,8 @@ class User::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       pp request.env["omniauth.auth"]
     end
   end
+
+  def after_omniauth_failure_path_for(scope)
+    root_path
+  end
 end

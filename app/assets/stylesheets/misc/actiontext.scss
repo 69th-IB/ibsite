@@ -1,0 +1,129 @@
+/*
+ * Provides a drop-in pointer for the default Trix stylesheet that will format the toolbar and
+ * the trix-editor content (whether displayed or under editing). Feel free to incorporate this
+ * inclusion directly in any other asset bundle and remove this file.
+ *
+ * require trix
+*/
+
+@import "remixicon";
+@import "trix";
+
+trix-toolbar {
+  cursor: default;
+
+  .trix-button-group {
+    margin-right: 24px;
+
+    .trix-button {
+      color: rgba(white, 0.8);
+      background: none;
+      border: 1px solid transparent;
+      border-radius: 4px;
+      padding: 4px 6px;
+
+      &:not(:disabled) {
+        cursor: pointer;
+      }
+
+      &:not(:disabled):hover {
+        color: #ffc107;
+      }
+
+      font-size: 0;
+      &::before { font-size: 14pt; }
+
+      &.trix-button--icon-bold { @include remixicon(bold); }
+      &.trix-button--icon-italic { @include remixicon(italic); }
+      &.trix-button--icon-strike { @include remixicon(strikethrough); }
+      &.trix-button--icon-link { @include remixicon(link); }
+
+      &.trix-button--icon-heading-1 { @include remixicon(heading); }
+      &.trix-button--icon-quote { @include remixicon(double-quotes-l); }
+      &.trix-button--icon-code { @include remixicon(code-s-slash-line); }
+      &.trix-button--icon-bullet-list { @include remixicon(list-unordered); }
+      &.trix-button--icon-number-list { @include remixicon(list-ordered); }
+      &.trix-button--icon-decrease-nesting-level { @include remixicon(indent-decrease); }
+      &.trix-button--icon-increase-nesting-level { @include remixicon(indent-increase); }
+
+      &.trix-button--icon-attach { @include remixicon(attachment-line); }
+
+      &.trix-button--icon-undo { @include remixicon(arrow-go-back-line); }
+      &.trix-button--icon-redo { @include remixicon(arrow-go-forward-line); }
+    }
+  }
+
+  margin-bottom: 12px;
+}
+
+trix-editor {
+  border: 1px solid rgba(white, 0.6);
+  border-radius: 2px;
+  padding: 12px 16px;
+
+  &:focus {
+    border: 1px solid white;
+  }
+
+  .attachment__toolbar {
+    position: absolute;
+    z-index: 1;
+    top: -0.9em;
+    left: 0;
+    width: 100%;
+    text-align: center;
+  }
+
+  .trix-button-group {
+    display: inline-flex;
+  }
+
+  .trix-button--remove {
+    text-indent: -9999px;
+    display: inline-block;
+    padding: 0;
+    outline: none;
+    width: 1.8em;
+    height: 1.8em;
+    line-height: 1.8em;
+    border-radius: 50%;
+    background-color: #fff;
+    border: 2px solid highlight;
+    box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.25);
+  }
+}
+
+.trix-content {
+  h1 {
+    font-size: 1.4em;
+    line-height: 1.5em;
+  }
+}
+
+/*
+ * We need to override trix.css’s image gallery styles to accommodate the
+ * <action-text-attachment> element we wrap around attachments. Otherwise,
+ * images in galleries will be squished by the max-width: 33%; rule.
+*/
+.trix-content .attachment-gallery > action-text-attachment,
+.trix-content .attachment-gallery > .attachment {
+  flex: 1 0 33%;
+  padding: 0 0.5em;
+  max-width: 33%;
+}
+
+.trix-content .attachment-gallery.attachment-gallery--2 > action-text-attachment,
+.trix-content .attachment-gallery.attachment-gallery--2 > .attachment, .trix-content .attachment-gallery.attachment-gallery--4 > action-text-attachment,
+.trix-content .attachment-gallery.attachment-gallery--4 > .attachment {
+  flex-basis: 50%;
+  max-width: 50%;
+}
+
+.trix-content action-text-attachment .attachment {
+  padding: 0 !important;
+  max-width: 100% !important;
+}
+
+action-text-attachment figcaption {
+  display: none;
+}

@@ -1,5 +1,8 @@
 <h1>Missions</h1>
 
+<%= link_to "New mission", new_mission_path %>
+<br /><br />
+
 <% if @missions.empty? %>
   <p>No missions found.</p>
 <% else %>
@@ -8,9 +11,13 @@
       <%= tag.span mission.title,
           class: "mission-title" %>
 
-      <%= tag.datetime mission.start.strftime("%A %d %B, %H:%M %Z"),
-          datetime: mission.start.iso8601,
-          class: "mission-start" %>
+      <% if mission.start.nil? %>
+        <span class="mission-start">Unplanned</span>
+      <% else %>
+        <%= tag.datetime mission.start.strftime("%A %d %B, %H:%M %Z"),
+            datetime: mission.start.iso8601,
+            class: "mission-start" %>
+      <% end %>
     <% end %>
   <% end %>
 <% end %>

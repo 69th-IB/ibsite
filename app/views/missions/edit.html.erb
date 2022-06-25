@@ -1,0 +1,21 @@
+<h1>New mission</h1>
+
+<%= form_for(@mission, url: @submit_url, method: @submit_method) do |f| %>
+  <h3><%= f.label :title %></h3>
+  <%= f.text_field :title, size: 40 %>
+  <h3><%= f.label :start %></h3>
+  <%= f.text_field :start,
+      value: @mission.start&.strftime("%Y-%m-%d %H:%M:%S %Z"),
+      data: {
+        controller: "flatpickr",
+        flatpickr_alt_input: true,
+        flatpickr_alt_format: "D d F, H:i",
+        flatpickr_enable_time: true,
+        flatpickr_time_24hr: true,
+        flatpickr_default_hour: @default_hour,
+      } %><br />
+  <br />
+  <%= f.rich_text_area :description %>
+  <br />
+  <%= f.submit %>
+<% end %>
