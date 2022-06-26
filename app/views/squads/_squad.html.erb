@@ -1,18 +1,24 @@
-<div class="squad" id="<%= dom_id squad %>">
+<%= tag.div class: "squad",
+    id: dom_id(squad),
+    style: "border-color: ##{squad.color};" do %>
   <strong class="name"><%= squad.name %></strong>
 
   <ul class="slots">
     <% for slot in squad.slots %>
       <li class="slot">
         <div class="role"><%= slot.name %></div>
-        <div class="player"><%= slot.user&.display_name %></div>
+        <div class="player"><%= slot.user&.display_name || "+" %></div>
       </li>
     <% end %>
   </ul>
 
-  <% if squad.children.any? %>
+  <% case squad.children.count %>
+  <% when 0 %>
+  <% when 1 %>
+    <%= render squad.children %>
+  <% else %>
     <div class="squad-list">
       <%= render squad.children %>
     </div>
   <% end %>
-</div>
+<% end %>

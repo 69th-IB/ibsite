@@ -35,16 +35,23 @@
 }
 
 .squad {
-  border: 2px solid brown;
+  margin-top: 24px;
+}
+
+.squad-list > .squad {
+  flex-grow: 1;
+  border: 3px solid rgba(white, 0.2);
+  border-radius: 3px;
   padding: 10px;
   // padding-left: 20px;
-  margin: 36px 12px 0;
+  margin: 24px 12px 0;
   text-align: center;
 }
 
 .slots {
   display: block;
-  width: 240px;
+  min-width: 240px;
+  max-width: 300px;
   list-style: none;
   padding-left: 0;
   margin: 0;
@@ -54,12 +61,31 @@
 }
 
 .slot {
-  padding: 4px;
-  border: 1px solid rgb(54, 42, 165);
+  border: 1px solid #404040;
   margin-bottom: -1px;
+  font-size: 0.9em;
+  font-weight: 600;
 
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
+  align-items: start;
+
+  & > * {
+    flex: 1;
+    text-align: center;
+    padding: 4px;
+  }
+
+  .role {
+    border-right: inherit;
+    cursor: default;
+  }
+
+  .player {
+    height: 1em;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
 }

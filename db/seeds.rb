@@ -6,21 +6,38 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-if Rails.env.development?
-  User.create do |u|
-    u.discord_name = "darkwater"
-    u.discord_uid = "120576143396044800"
-    u.discord_discriminator = "2138"
-    u.discord_avatar_url = "https://cdn.discordapp.com/avatars/120576143396044800/73591b4ca58e10ad64db1d38f6ca6f42"
-  end
+if Rails.env.development? and User.any?
+  colors = {
+    red: "b71c1c",
+    pink: "880e4f",
+    purple: "4a148c",
+    deep_purple: "311b92",
+    indigo: "1a237e",
+    blue: "0d47a1",
+    light_blue: "01579b",
+    cyan: "006064",
+    teal: "004d40",
+    green: "1b5e20",
+    light_green: "33691e",
+    lime: "827717",
+    yellow: "f57f17",
+    amber: "ff6f00",
+    orange: "e65100",
+    deep_orange: "bf360c",
+    brown: "3e2723",
+    gray: "212121",
+    blue_gray: "263238",
+    black: "000000",
+  }
 
-  Mission.create do |m|
+  Mission.create! do |m|
     m.title = "Operation Mahjong"
     m.start = Date.today.next_occurring(:sunday) + 7.days + 20.hours
     m.creator = User.first
 
     zeus = m.squads.build do |s|
       s.name = "Command"
+      s.color = colors[:green]
       s.slots.build name: "Zeus"
       s.slots.build name: "Co-Zeus"
     end
@@ -28,14 +45,16 @@ if Rails.env.development?
     platoon = m.squads.build do |s|
       s.name = "Basilisk"
       s.parent = zeus
+      s.color = colors[:light_blue]
       s.slots.build name: "Platoon Leader"
       s.slots.build name: "Platoon Medic"
     end
 
-    %w( Adder Boa Cobra ).each do |name|
+    [["Adder", :red], ["Boa", :blue], ["Cobra", :teal]].each do |name, color|
       m.squads.build do |s|
         s.name = name
         s.parent = platoon
+        s.color = colors[color]
         s.slots.build name: "Squad Leader"
         s.slots.build name: "Combat Medic"
         s.slots.build name: "Autorifleman"
@@ -50,6 +69,7 @@ if Rails.env.development?
     viper = m.squads.build do |s|
       s.name = "Viper"
       s.parent = platoon
+      s.color = colors[:black]
       s.slots.build name: "Cell Leader"
       s.slots.build name: "Combat Medic"
       s.slots.build name: "Team Leader"
@@ -62,18 +82,20 @@ if Rails.env.development?
     dragon = m.squads.build do |s|
       s.name = "Dragon"
       s.parent = viper
+      s.color = colors[:red]
       s.slots.build name: "Pilot"
       s.slots.build name: "Gunner"
     end
   end
 
-  Mission.create do |m|
+  Mission.create! do |m|
     m.title = "Operation Domino"
     m.start = Date.today.next_occurring(:sunday) + 20.hours
     m.creator = User.first
 
     zeus = m.squads.build do |s|
       s.name = "Company HQ"
+      s.color = colors[:pink]
       s.slots.build name: "Command"
       s.slots.build name: "Aide-de-Camp"
     end
@@ -81,16 +103,18 @@ if Rails.env.development?
     platoon = m.squads.build do |s|
       s.name = "Priest"
       s.parent = zeus
+      s.color = colors[:purple]
       s.slots.build name: "Platoon Leader"
       s.slots.build name: "Platoon Medic"
       s.slots.build name: "Platoon Sgt"
       s.slots.build name: "Platoon Specialist"
     end
 
-    %w( Alpha Bravo ).each do |name|
+    [["Alpha", :red], ["Bravo", :blue]].each do |name, color|
       parent = m.squads.build do |s|
         s.name = "#{name} 1"
         s.parent = platoon
+        s.color = colors[color]
         s.slots.build name: "Squad Leader"
         s.slots.build name: "Combat Medic"
         s.slots.build name: "Rifleman"
@@ -110,6 +134,7 @@ if Rails.env.development?
     c1 = m.squads.build do |s|
       s.name = "Charlie 1"
       s.parent = platoon
+      s.color = colors[:cyan]
       s.slots.build name: "Driver (Lead)"
     end
 
@@ -133,12 +158,13 @@ if Rails.env.development?
 
     m.squads.build do |s|
       s.name = "Dove"
+      s.color = colors[:yellow]
       s.slots.build name: "Pilot"
       s.slots.build name: "Co-Pilot"
     end
   end
 
-  Mission.create do |m|
+  Mission.create! do |m|
     m.title = "Operation Westerly Sandstorm"
     m.start = Date.today.next_occurring(:sunday) - 7.days + 20.hours
     m.creator = User.first
@@ -151,7 +177,6 @@ if Rails.env.development?
 
     m.squads.build do |s|
       s.name = "OPFOR"
-      s.parent = zeus
       s.slots.build name: "OPFOR"
       s.slots.build name: "OPFOR"
     end
