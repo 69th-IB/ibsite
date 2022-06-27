@@ -18,5 +18,14 @@ module Ibsite
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    config.after_initialize do
+      if defined? Rails::Server
+        require "discord/discord"
+        Discord::Discord.instance
+
+        Discord::UpdateRolesJob.perform_later
+      end
+    end
   end
 end

@@ -1,5 +1,7 @@
 class ApplicationController < ActionController::Base
   include Pundit::Authorization
+  after_action :verify_authorized, except: [:index, :show]
+  after_action :verify_policy_scoped, only: [:index, :show]
 
   around_action :switch_time_zone
 

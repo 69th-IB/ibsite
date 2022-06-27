@@ -2,6 +2,8 @@ class User::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   skip_before_action :verify_authenticity_token
 
   def discord
+    skip_authorization
+
     pp request.env["omniauth.auth"]
     @user = User.from_discord(request.env["omniauth.auth"])
 
@@ -14,11 +16,14 @@ class User::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def steam
+    skip_authorization
+
     pp request.env["omniauth.auth"]
   end
 
   def developer
     raise "not a development environment" unless Rails.env.development?
+    skip_authorization
 
     @user = User.from_developer(request.env["omniauth.auth"])
 

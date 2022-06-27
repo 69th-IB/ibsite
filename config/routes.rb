@@ -22,6 +22,8 @@ Rails.application.routes.draw do
   resources :missions
 
   namespace :admin do
-    get 'permissions/index'
+    get "permissions", to: "permissions#index"
+    put "permissions/grant", to: "permissions#grant"
+    delete "permissions/grant", to: "permissions#ungrant"
   end
 end

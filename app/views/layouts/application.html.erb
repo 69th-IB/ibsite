@@ -30,13 +30,15 @@
               <li class="account">
                 <%= link_to "/" do %>
                   <%= image_tag current_user.discord_avatar_url %>
-                  <%= tag.span current_user.display_name, class: "username" %>
+                  <%= tag.span current_user.display_name,
+                      class: "username",
+                      style: "color: ##{current_user.color}" %>
                 <% end %>
 
                 <ul class="account-menu">
                   <% if current_user.admin? %>
                     <li>
-                      <%= link_to "Admin", admin_permissions_index_path %>
+                      <%= link_to "Admin", admin_permissions_path %>
                     </li>
                   <% end %>
 

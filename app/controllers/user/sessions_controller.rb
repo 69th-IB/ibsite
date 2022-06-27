@@ -2,6 +2,7 @@
 
 class User::SessionsController < Devise::SessionsController
   def destroy
+    skip_authorization
     super
   end
 

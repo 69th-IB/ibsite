@@ -4,6 +4,7 @@ class Discord::RolePermission < ApplicationRecord
   PERMISSIONS = %w[
     create_missions
     modify_others_missions
+    delete_missions
     view_draft_missions
     view_missions_early
     enlist_self

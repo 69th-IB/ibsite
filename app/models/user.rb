@@ -13,11 +13,23 @@ class User < ApplicationRecord
 
   has_many :permissions, through: :roles, class_name: "Discord::RolePermission"
 
-  def display_name = discord_nick || discord_name
   def admin? = roles.any? { |role| role.admin }
+  def display_name = discord_nick || discord_name
+
+  def color
+    roles.order(position: :desc)
+      .select { |role| role.color != nil }
+      .first
+      &.color || "808080"
+  end
+
+  def css_color(default = "inherit")
+    return default if color.nil?
+    "##{color}"
+  end
 
   def can?(permission)
-    admin? || permissions.where(key: permission.to_s).exists?
+    admin? || permissions.any? { |p| p.key == permission.to_s }
   end
 
   def self.from_discord(auth)
@@ -26,6 +38,8 @@ class User < ApplicationRecord
       user.discord_avatar_url = auth.info.image
       user.discord_discriminator = auth.extra.raw_info.discriminator
       user.discord_accent_color = auth.extra.raw_info.accent_color
+
+      user.discord_nick = Discord::Discord.instance.member_nick(auth.uid)
     end
   end
 

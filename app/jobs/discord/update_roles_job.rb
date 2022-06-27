@@ -7,19 +7,23 @@ class Discord::UpdateRolesJob < ApplicationJob
     discord = Discord::Discord.instance
 
     ActiveRecord::Base.transaction do
-      Discord::Role.delete_all
+      newroles = discord.server.roles
 
-      discord.server.roles.each do |role|
+      Discord::Role.where.not(uid: newroles.map(&:id)).destroy_all
+
+      newroles.each do |role|
         # discordrb is doodoo
         color = role.color.hex.rjust(6, "0") if role.color.combined != 0
 
-        Discord::Role.create!(
+        record = {
           uid: role.id,
           name: role.name,
           color: color,
           position: role.position,
           admin: role.permissions.administrator,
-        )
+        }
+
+        Discord::Role.upsert(record, unique_by: :uid)
       end
 
       Discord::Role.connection.truncate :discord_role_members
@@ -33,6 +37,8 @@ class Discord::UpdateRolesJob < ApplicationJob
           roles.each do |role|
             user.roles << Discord::Role.find_by(uid: role.id)
           end
+
+          user.update discord_nick: discord.member_nick(user.discord_uid)
         end
       end
     end
