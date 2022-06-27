@@ -1,0 +1,6 @@
+<li class="slot" id="<%= dom_id slot %>">
+  <div class="role"><%= slot.name %></div>
+  <div class="player" style="color: #<%= slot.user&.color || "404040" %>">
+    <%= slot.user&.display_name || "empty" %>
+  </div>
+</li>

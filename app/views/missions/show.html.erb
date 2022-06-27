@@ -9,7 +9,7 @@
   <%= @mission.description %>
 </p>
 
-<%= turbo_stream_from @mission, :squads %>
+<%= turbo_stream_from @mission %>
 
 <div class="squad-list">
   <%= render @mission.root_squads %>
