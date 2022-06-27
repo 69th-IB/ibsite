@@ -1,13 +1,21 @@
 <h1>Missions</h1>
 
-<%= link_to "New mission", new_mission_path %>
-<br /><br />
+<% if policy(Mission).new? %>
+  <%= link_to "New mission", new_mission_path %>
+  <br /><br />
+<% end %>
 
 <% if @missions.empty? %>
   <p>No missions found.</p>
 <% else %>
   <% @missions.each do |mission| %>
     <%= link_to mission, class: "mission" do %>
+      <% if mission.draft? %>
+        <span class="draft">Draft</span>
+      <% elsif !mission.public? %>
+        <span class="private">Early Signups</span>
+      <% end %>
+
       <%= tag.span mission.title,
           class: "mission-title" %>
 

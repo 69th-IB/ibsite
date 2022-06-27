@@ -1,7 +1,9 @@
 <h1><%= @mission.title %></h1>
 
-<%= link_to "Edit mission", edit_mission_path(@mission) %>
-<br /><br />
+<% if policy(Mission).edit? %>
+  <%= link_to "Edit mission", edit_mission_path(@mission) %>
+  <br /><br />
+<% end %>
 
 <p>
   <%= @mission.description %>

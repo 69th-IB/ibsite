@@ -7,15 +7,25 @@ class User < ApplicationRecord
         ? [:discord, :steam, :developer]
         : [:discord, :steam]
 
+  has_and_belongs_to_many :roles,
+    class_name: "Discord::Role",
+    join_table: :discord_role_members
+
+  has_many :permissions, through: :roles, class_name: "Discord::RolePermission"
+
+  def display_name = discord_nick || discord_name
+  def admin? = roles.any? { |role| role.admin }
+
+  def can?(permission)
+    admin? || permissions.where(key: permission.to_s).exists?
+  end
+
   def self.from_discord(auth)
     where(discord_uid: auth.uid).first_or_create do |user|
       user.discord_name = auth.info.name
       user.discord_avatar_url = auth.info.image
       user.discord_discriminator = auth.extra.raw_info.discriminator
       user.discord_accent_color = auth.extra.raw_info.accent_color
-
-      # if User is confirmable
-      # user.skip_confirmation!
     end
   end
 
@@ -28,9 +38,5 @@ class User < ApplicationRecord
       user.discord_discriminator = rand(9999).to_s.rjust(4, "0")
       user.discord_accent_color = rand(0xffffff)
     end
-  end
-
-  def display_name
-    discord_name
   end
 end

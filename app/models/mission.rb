@@ -5,6 +5,9 @@ class Mission < ApplicationRecord
 
   has_rich_text :description
 
+  # can't be public if it's a draft
+  validates :public, exclusion: { in: [true], if: :draft? }
+
   def root_squads
     squads.where(parent_id: nil)
   end

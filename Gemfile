@@ -77,3 +77,7 @@ gem "omniauth", "~> 2.0"
 gem "omniauth-rails_csrf_protection", "~> 1.0"
 gem "omniauth-discord", "~> 1.0"
 gem "omniauth-steam", "~> 1.0"
+
+gem "discordrb", "~> 3.4"
+
+gem "pundit", "~> 2.2"

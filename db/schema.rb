@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_26_132509) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_27_004113) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -49,11 +49,40 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_26_132509) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "discord_role_members", force: :cascade do |t|
+    t.string "user_id", null: false
+    t.string "role_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id", "role_id"], name: "index_discord_role_members_on_user_id_and_role_id", unique: true
+  end
+
+  create_table "discord_role_permissions", force: :cascade do |t|
+    t.integer "role_id", null: false
+    t.string "key"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["role_id", "key"], name: "index_discord_role_permissions_on_role_id_and_key", unique: true
+    t.index ["role_id"], name: "index_discord_role_permissions_on_role_id"
+  end
+
+  create_table "discord_roles", force: :cascade do |t|
+    t.string "uid", null: false
+    t.string "name", null: false
+    t.string "color"
+    t.integer "position", null: false
+    t.boolean "admin", default: false, null: false
+    t.boolean "hidden_for_permissions", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["uid"], name: "index_discord_roles_on_uid", unique: true
+  end
+
   create_table "missions", force: :cascade do |t|
     t.string "title", default: "Operation", null: false
     t.datetime "start"
     t.integer "creator_id", null: false
-    t.boolean "published", default: false, null: false
+    t.boolean "draft", default: true, null: false
     t.boolean "public", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -94,6 +123,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_26_132509) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "time_zone", default: "UTC", null: false
+    t.string "discord_nick"
+    t.string "discord_color"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

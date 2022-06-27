@@ -1,0 +1,65 @@
+<h1>Role Permissions</h1>
+
+<p>
+  A permission is granted as long as the user belongs to one of the roles that
+  grant the permission.
+</p>
+
+<table class="permissions-matrix">
+  <thead>
+    <tr>
+      <th>Permission</th>
+      <% for role in @roles %>
+        <th style="color: <%= role.css_color %>"><%= role.name %></th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Administrator<br />(Grant in Discord)</td>
+      <% for role in @roles %>
+        <td><%= check_box_tag nil, nil, role.admin?, disabled: true %></td>
+      <% end %>
+    </tr>
+    <% for permission in @permissions %>
+      <tr>
+        <td><%= permission.humanize %></td>
+        <% for role in @roles %>
+          <td>
+            <label>
+              <% if role.admin? %>
+                <%= tag.input type: "checkbox",
+                    checked: true,
+                    disabled: true %>
+              <% else %>
+                <%= tag.input type: "checkbox",
+                    checked: role.can?(permission),
+                    data: {
+                      role: role.id,
+                      permission: permission,
+                    } %>
+              <% end %>
+            </label>
+          </td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%#
+<h2>Visible roles</h2>
+<p>Here you can hide roles from the above matrix.</p>
+
+<% for role in @roles %
+  <div class="role-checkbox">
+    <label>
+      <%= tag.input type: "checkbox",
+          checked: role.hidden_for_permissions?,
+          data: {
+            role: role.id,
+          } %
+      <%= role.name %
+    </label>
+  </div>
+<% end %>

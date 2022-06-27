@@ -92,6 +92,7 @@ if Rails.env.development? and User.any?
     m.title = "Operation Domino"
     m.start = Date.today.next_occurring(:sunday) + 20.hours
     m.creator = User.first
+    m.draft = false
 
     zeus = m.squads.build do |s|
       s.name = "Company HQ"
@@ -168,6 +169,8 @@ if Rails.env.development? and User.any?
     m.title = "Operation Westerly Sandstorm"
     m.start = Date.today.next_occurring(:sunday) - 7.days + 20.hours
     m.creator = User.first
+    m.draft = false
+    m.public = true
 
     zeus = m.squads.build do |s|
       s.name = "Command"

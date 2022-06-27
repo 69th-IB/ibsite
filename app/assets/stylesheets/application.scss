@@ -16,6 +16,7 @@
  */
 
 @import "layout/responsive";
+@import "misc/remixicon";
 
 html {
   font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir,
@@ -59,4 +60,36 @@ input[type="text"] {
 h3 {
   margin-top: 16px;
   margin-bottom: 4px;
+}
+
+input[type=checkbox] {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  margin-top: 3px;
+  background: rgba(red, 0.1);
+  border: 1px solid rgba(white, 0.2);
+
+  @include remixicon(check-fill);
+  color: rgba(white, 0);
+
+  transition: all 0.05s ease-in-out, background-color 0.2s ease-in-out;
+
+  &:checked {
+    background: rgba(lightgreen, 0.5);
+    color: white;
+    text-align: center;
+  }
+
+  &:not(:disabled) {
+    cursor: pointer;
+
+    &:hover {
+      border-color: rgba(white, 0.7);
+    }
+  }
+
+  &:disabled {
+    opacity: 0.5;
+  }
 }

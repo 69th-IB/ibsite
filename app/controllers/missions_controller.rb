@@ -1,17 +1,17 @@
 class MissionsController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show]
-
   def index
-    @missions = Mission.all
+    @missions = policy_scope(Mission)
   end
 
   def show
-    @mission = Mission.includes(:squads, :slots).find(params[:id])
+    @mission = policy_scope(Mission).includes(:squads, :slots).find(params[:id])
 
     return render 'not_found', status: 404 if @mission.nil?
   end
 
   def new
+    authorize Mission
+
     @mission = Mission.new
     set_default_hour
     @submit_url = missions_path
@@ -20,6 +20,8 @@ class MissionsController < ApplicationController
   end
 
   def create
+    authorize Mission
+
     @mission = Mission.new(mission_params)
     @mission.creator = current_user
 
@@ -32,6 +34,8 @@ class MissionsController < ApplicationController
 
   def edit
     @mission = Mission.find(params[:id])
+    authorize @mission
+
     set_default_hour
     @submit_url = mission_path(@mission)
     @submit_method = :patch
@@ -39,6 +43,7 @@ class MissionsController < ApplicationController
 
   def update
     @mission = Mission.find(params[:id])
+    authorize @mission
 
     if @mission.update(mission_params)
       redirect_to @mission

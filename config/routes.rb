@@ -20,4 +20,8 @@ Rails.application.routes.draw do
   end
 
   resources :missions
+
+  namespace :admin do
+    get 'permissions/index'
+  end
 end

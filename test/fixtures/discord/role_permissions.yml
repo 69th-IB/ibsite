@@ -1,0 +1,9 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  discord_role: one
+  key: MyString
+
+two:
+  discord_role: two
+  key: MyString

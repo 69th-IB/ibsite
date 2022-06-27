@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  include Pundit::Authorization
+
   around_action :switch_time_zone
 
   def switch_time_zone(&block)

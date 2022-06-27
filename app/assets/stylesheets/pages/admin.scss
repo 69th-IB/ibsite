@@ -1,0 +1,28 @@
+table.permissions-matrix {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+
+  thead th:first-child {
+    text-align: start;
+  }
+
+  tr {
+    border-bottom: 1px solid rgba(white, 0.2);
+  }
+
+  td, th {
+    text-align: center;
+
+    &:first-child {
+      padding: 4px 0;
+      text-align: start;
+    }
+  }
+
+  label {
+    padding: 4px 0;
+    display: block;
+    cursor: pointer;
+  }
+}
