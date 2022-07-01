@@ -20,6 +20,8 @@ Rails.application.routes.draw do
   end
 
   resources :missions
+  put 'slots/:id/enlist/:user_id', to: "slots#enlist", as: :enlist_slot
+  delete 'slots/:id/unenlist', to: "slots#unenlist", as: :unenlist_slot
 
   namespace :admin do
     get "permissions", to: "permissions#index"

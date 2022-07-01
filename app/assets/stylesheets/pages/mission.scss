@@ -1,3 +1,5 @@
+@import "misc/remixicon";
+
 .mission {
   display: block;
   text-decoration: none;
@@ -65,6 +67,7 @@
   margin-bottom: -1px;
   font-size: 0.9em;
   font-weight: 600;
+  cursor: default;
 
   display: flex;
   flex-direction: row;
@@ -77,15 +80,78 @@
     padding: 4px;
   }
 
+  .actions {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+
+    display: flex;
+
+    & > a {
+      text-decoration: none;
+      display: block;
+      width: 32px;
+      border: none;
+      background: grey;
+      color: white;
+      font-size: 1.1em;
+      line-height: 1.4em;
+      cursor: pointer;
+      opacity: 0.8;
+
+      transition: opacity 0.05s ease-in-out;
+
+      &:hover {
+        opacity: 1;
+      }
+
+      &.radio { background-color: rgb(8, 133, 60); }
+      &.icon-add { background-color: #1f5ebb; @include remixicon('add-fill'); }
+      &.icon-remove { background-color: #a11717; @include remixicon('close-fill'); }
+      &.icon-edit { background-color: #1190da; @include remixicon('edit-fill'); }
+      &.icon-lock { background-color: #4b3232; @include remixicon('lock-fill'); }
+    }
+  }
+
   .role {
+    position: relative;
     border-right: inherit;
-    cursor: default;
+
+    .actions {
+      left: 0;
+      width: 100%;
+      justify-content: start;
+
+      & > a {
+        width: 12px;
+        color: rgba(white, 0.0);
+        transition: all 0.1s ease-in-out;
+      }
+
+      &:hover > a {
+        width: 32px;
+        color: white;
+      }
+    }
   }
 
   .player {
-    height: 1em;
+    position: relative;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
+
+    .actions {
+      right: 0;
+      width: 0px;
+      overflow: hidden;
+      justify-content: end;
+
+      transition: width 0.1s ease-in-out;
+    }
+
+    &:hover > .actions {
+      width: 100%;
+    }
   }
 }

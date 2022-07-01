@@ -1,6 +1,36 @@
 <li class="slot" id="<%= dom_id slot %>">
-  <div class="role"><%= slot.name %></div>
-  <div class="player" style="color: #<%= slot.user&.color || "404040" %>">
+  <div class="role" tabindex="0">
+    <% if slot.name == "Squad Leader" %>
+      <div class="actions">
+        <%= link_to "1", nil, class: "radio" %>
+      </div>
+    <% end %>
+
+    <%= slot.name %>
+  </div>
+  <div class="player" style="color: #<%= slot.user&.color || "404040" %>" tabindex="0">
     <%= slot.user&.display_name || "empty" %>
+
+    <div class="actions">
+      <% if current_user&.can?(:enlist_self) && slot.user != current_user %>
+        <%= link_to "", enlist_slot_path(slot, current_user),
+            class: "icon-add",
+            data: { turbo_method: :put } %>
+      <% end %>
+
+      <% if slot.user == current_user %>
+        <%= link_to "", unenlist_slot_path(slot),
+            class: "icon-remove",
+            data: { turbo_method: :delete } %>
+      <% end %>
+
+      <% if current_user&.can? :enlist_others %>
+        <%= link_to "", nil, class: "icon-edit" %>
+      <% end %>
+
+      <% if policy(slot.mission).edit? %>
+        <%= link_to "", nil, class: "icon-lock" %>
+      <% end %>
+    </div>
   </div>
 </li>
