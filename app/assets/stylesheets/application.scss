@@ -19,9 +19,9 @@
 @import "misc/remixicon";
 
 html {
-  font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir,
-      segoe ui, helvetica neue, helvetica, Cantarell, Ubuntu, roboto,
-      noto, arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, Avenir Next, Avenir,
+      Segoe UI, Helvetica Neue, Helvetica, Cantarell, Ubuntu, Roboto,
+      Noto, Arial, sans-serif;
 }
 
 body {
@@ -73,7 +73,7 @@ input[type=checkbox] {
   @include remixicon(check-fill);
   color: rgba(white, 0);
 
-  transition: all 0.05s ease-in-out, background-color 0.2s ease-in-out;
+  transition: all 0.04s ease-in-out, background-color 0.1s ease-in-out;
 
   &:checked {
     background: rgba(lightgreen, 0.5);
@@ -91,5 +91,29 @@ input[type=checkbox] {
 
   &:disabled {
     opacity: 0.5;
+  }
+}
+
+label.pointer {
+  cursor: pointer;
+}
+
+button {
+  background: #2f352f;
+  border: 1px solid rgba(white, 0.2);
+  border-radius: 2px;
+  color: white;
+  padding: 6px 8px;
+  cursor: pointer;
+  transition: all 0.04s ease-in-out;
+
+  &:hover:not(:disabled) {
+    background: #3f4f3f;
+    border-color: rgba(white, 0.6);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: default;
   }
 }

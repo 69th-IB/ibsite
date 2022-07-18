@@ -1,0 +1,8 @@
+<h1>Modlists</h1>
+
+<% if policy(Modlist).new? %>
+  <%= button_to "New modlist", modlists_path, :method => :post %>
+  <br /><br />
+<% end %>
+
+<%= render @modlists %>

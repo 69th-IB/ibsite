@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_27_004113) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_12_195951) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -89,6 +89,46 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_27_004113) do
     t.index ["creator_id"], name: "index_missions_on_creator_id"
   end
 
+  create_table "modlists", force: :cascade do |t|
+    t.string "title"
+    t.boolean "published", default: false
+    t.integer "creator_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "modlists_mods", force: :cascade do |t|
+    t.integer "modlist_id", null: false
+    t.integer "mod_id", null: false
+    t.boolean "optional", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["mod_id"], name: "index_modlists_mods_on_mod_id"
+    t.index ["modlist_id"], name: "index_modlists_mods_on_modlist_id"
+  end
+
+  create_table "mods", force: :cascade do |t|
+    t.string "title"
+    t.integer "workshop_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "server_configs", force: :cascade do |t|
+    t.string "params"
+    t.string "branch"
+    t.string "creator_dlc"
+    t.integer "maxfps"
+    t.integer "headless_clients"
+    t.integer "modlist_id", null: false
+    t.integer "mission_id", null: false
+    t.string "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["mission_id"], name: "index_server_configs_on_mission_id"
+    t.index ["modlist_id"], name: "index_server_configs_on_modlist_id"
+  end
+
   create_table "slots", force: :cascade do |t|
     t.string "name"
     t.integer "squad_id", null: false
@@ -130,6 +170,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_27_004113) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "missions", "users", column: "creator_id"
+  add_foreign_key "modlists_mods", "modlists"
+  add_foreign_key "modlists_mods", "mods"
+  add_foreign_key "server_configs", "missions"
+  add_foreign_key "server_configs", "modlists"
   add_foreign_key "slots", "squads"
   add_foreign_key "slots", "users"
   add_foreign_key "squads", "missions"

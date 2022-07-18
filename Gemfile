@@ -81,3 +81,7 @@ gem "omniauth-steam", "~> 1.0"
 gem "discordrb", "~> 3.4"
 
 gem "pundit", "~> 2.2"
+
+gem "docker-api", "~> 2.2"
+
+gem "httparty", "~> 0.20.0"

@@ -23,6 +23,7 @@
           <ul>
             <li><%= link_to "Home", root_path %></li>
             <li><%= link_to "Missions", missions_path %></li>
+            <li><%= link_to "Mods", modlists_path %></li>
 
             <li class="separator"></li>
 
@@ -36,6 +37,12 @@
                 <% end %>
 
                 <ul class="account-menu">
+                  <% if current_user.can? :manage_server %>
+                    <li>
+                      <%= link_to "Server", manage_server_path %>
+                    </li>
+                  <% end %>
+
                   <% if current_user.admin? %>
                     <li>
                       <%= link_to "Admin", admin_permissions_path %>
@@ -69,7 +76,7 @@
       </div>
     </header>
 
-    <main data-controller="<%= controller_name %>">
+    <main data-controller="<%= controller_path.gsub(/_/, "-").gsub(/\//, "--") %>">
       <%= yield %>
     </main>
 

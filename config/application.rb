@@ -19,6 +19,8 @@ module Ibsite
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
 
+    config.arma = config_for(:arma)
+
     config.after_initialize do
       if defined? Rails::Server
         require "discord/discord"

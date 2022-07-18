@@ -2,6 +2,8 @@ class Discord::RolePermission < ApplicationRecord
   belongs_to :role, class_name: "Discord::Role"
 
   PERMISSIONS = %w[
+    manage_server
+    manage_modlists
     create_missions
     modify_others_missions
     delete_missions

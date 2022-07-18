@@ -1,0 +1,7 @@
+shared:
+
+development:
+  container_name: arma-dev
+
+production:
+  container_name: arma

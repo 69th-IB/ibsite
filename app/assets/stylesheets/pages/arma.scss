@@ -1,0 +1,13 @@
+.button-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-left: 0;
+  list-style: none;
+
+  & > * {
+    margin-right: 1rem;
+  }
+}

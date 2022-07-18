@@ -29,6 +29,10 @@ class User < ApplicationRecord
   end
 
   def can?(permission)
+    if Rails.env.development?
+      throw "invalid permission #{permission}" unless Discord::RolePermission::PERMISSIONS.include?(permission.to_s)
+    end
+
     admin? || permissions.any? { |p| p.key == permission.to_s }
   end
 

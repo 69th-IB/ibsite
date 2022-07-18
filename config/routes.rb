@@ -13,19 +13,24 @@ Rails.application.routes.draw do
     delete "sign_out", to: "user/sessions#destroy"
   end
 
-  namespace :user do
-    get 'settings/index'
-    get 'omniauth_callbacks/discord'
-    get 'omniauth_callbacks/steam'
-  end
-
   resources :missions
   put 'slots/:id/enlist/:user_id', to: "slots#enlist", as: :enlist_slot
   delete 'slots/:id/unenlist', to: "slots#unenlist", as: :unenlist_slot
+
+  resources :modlists, only: [:index, :show, :create, :update, :destroy]
+
+  namespace :user do
+    get 'omniauth_callbacks/discord'
+    get 'omniauth_callbacks/steam'
+  end
 
   namespace :admin do
     get "permissions", to: "permissions#index"
     put "permissions/grant", to: "permissions#grant"
     delete "permissions/grant", to: "permissions#ungrant"
   end
+
+  get "/server", to: "manage_server#index", as: :manage_server
+  post "/server/start", to: "manage_server#start", as: :manage_server_start
+  post "/server/stop", to: "manage_server#stop", as: :manage_server_stop
 end
