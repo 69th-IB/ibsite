@@ -18,6 +18,8 @@ Rails.application.routes.draw do
   delete 'slots/:id/unenlist', to: "slots#unenlist", as: :unenlist_slot
 
   resources :modlists, only: [:index, :show, :create, :update, :destroy]
+  post "modlists/:id/publish", to: "modlists#publish", as: :publish_modlist
+  get "modlists/:id/diff/:other_id", to: "modlists#diff", as: :diff_modlist
 
   namespace :user do
     get 'omniauth_callbacks/discord'

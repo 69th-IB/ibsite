@@ -1,27 +1,29 @@
-<ul class="button-bar">
-  <li>
-    <button
-        disabled
-        data-manage-server-target="start"
-        data-action="manage-server#start">
-      Start
-    </button>
-  </li>
-  <li>
-    <button
-        disabled
-        data-manage-server-target="stop"
-        data-action="manage-server#stop">
-      Stop
-    </button>
-  </li>
-  <li>
-    <label class="pointer">
-      <input
-          type="checkbox"
-          checked
-          data-manage-server-target="validate" />
-      Validate on start
-    </label>
-  </li>
-</ul>
+<div data-controller="manage-server">
+  <ul class="button-bar">
+    <li>
+      <button
+          disabled
+          data-manage-server-target="start"
+          data-action="manage-server#start">
+        Start
+      </button>
+    </li>
+    <li>
+      <button
+          disabled
+          data-manage-server-target="stop"
+          data-action="manage-server#stop">
+        Stop
+      </button>
+    </li>
+    <li>
+      <label class="pointer">
+        <input
+            type="checkbox"
+            checked
+            data-manage-server-target="validate" />
+        Validate on start
+      </label>
+    </li>
+  </ul>
+</div>

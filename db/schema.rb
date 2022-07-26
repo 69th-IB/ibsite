@@ -89,27 +89,30 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_12_195951) do
     t.index ["creator_id"], name: "index_missions_on_creator_id"
   end
 
-  create_table "modlists", force: :cascade do |t|
-    t.string "title"
-    t.boolean "published", default: false
-    t.integer "creator_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "modlists_mods", force: :cascade do |t|
+  create_table "modlist_mods", force: :cascade do |t|
     t.integer "modlist_id", null: false
     t.integer "mod_id", null: false
     t.boolean "optional", default: false
+    t.boolean "server_only", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["mod_id"], name: "index_modlists_mods_on_mod_id"
-    t.index ["modlist_id"], name: "index_modlists_mods_on_modlist_id"
+    t.index ["mod_id"], name: "index_modlist_mods_on_mod_id"
+    t.index ["modlist_id"], name: "index_modlist_mods_on_modlist_id"
+  end
+
+  create_table "modlists", force: :cascade do |t|
+    t.string "title"
+    t.integer "creator_id"
+    t.datetime "published_at"
+    t.integer "parent_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "mods", force: :cascade do |t|
     t.string "title"
     t.integer "workshop_id"
+    t.integer "file_size"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -170,8 +173,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_12_195951) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "missions", "users", column: "creator_id"
-  add_foreign_key "modlists_mods", "modlists"
-  add_foreign_key "modlists_mods", "mods"
+  add_foreign_key "modlist_mods", "modlists"
+  add_foreign_key "modlist_mods", "mods"
   add_foreign_key "server_configs", "missions"
   add_foreign_key "server_configs", "modlists"
   add_foreign_key "slots", "squads"

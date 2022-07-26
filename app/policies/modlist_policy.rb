@@ -1,7 +1,11 @@
 class ModlistPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      scope.all
+      if user&.can? :manage_modlists
+        scope.all
+      else
+        scope.where published: true
+      end
     end
   end
 
@@ -13,15 +17,23 @@ class ModlistPolicy < ApplicationPolicy
     true
   end
 
+  def diff?
+    show?
+  end
+
   def create?
-    user.can? :manage_modlists
+    user&.can? :manage_modlists
   end
 
   def update?
-    user.can? :manage_modlists
+    user&.can?(:manage_modlists) && !record.published?
+  end
+
+  def publish?
+    update? && record.mods.any? && !record.published?
   end
 
   def destroy?
-    user.can? :manage_modlists
+    user&.can?(:manage_modlists) && !record.published?
   end
 end

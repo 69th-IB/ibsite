@@ -55,7 +55,7 @@ class MissionsController < ApplicationController
   private
 
   def mission_params
-    params.require(:mission).permit(:title, :start, :description)
+    params.require(:mission).permit(:title, :start, :description, :pbo_file)
   end
 
   def set_default_hour

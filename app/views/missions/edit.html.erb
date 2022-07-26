@@ -1,4 +1,4 @@
-<h1>New mission</h1>
+<h1>Edit mission</h1>
 
 <%= form_for(@mission, url: @submit_url, method: @submit_method) do |f| %>
   <h3><%= f.label :title %></h3>
@@ -14,7 +14,11 @@
         flatpickr_time_24hr: true,
         flatpickr_default_hour: @default_hour,
       } %><br />
-  <br />
+  <h3>PBO file</h3>
+  <%= @mission.pbo_file.filename %><br /><br />
+  <%= f.file_field :pbo_file %>
+  <br /><br />
+  <h3>Description</h3>
   <%= f.rich_text_area :description %>
   <br />
   <%= f.submit %>

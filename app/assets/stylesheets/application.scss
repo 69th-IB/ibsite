@@ -69,6 +69,7 @@ input[type=checkbox] {
   margin-top: 3px;
   background: rgba(red, 0.1);
   border: 1px solid rgba(white, 0.2);
+  font-size: 16px;
 
   @include remixicon(check-fill);
   color: rgba(white, 0);
@@ -98,7 +99,7 @@ label.pointer {
   cursor: pointer;
 }
 
-button {
+button, input[type="submit"] {
   background: #2f352f;
   border: 1px solid rgba(white, 0.2);
   border-radius: 2px;

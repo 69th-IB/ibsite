@@ -1,0 +1,24 @@
+<p><%= link_to "<< Back to modlists overview", modlists_path %>
+
+<h1><%= @other_modlist.title %> &rarr; <%= @modlist.title %></h1>
+
+<h2>Added</h2>
+<div class="modlist-mods">
+  <% for mod in @added %>
+    <%= render "mod", mod: mod, editable: false %>
+  <% end %>
+</div>
+
+<h2>Removed</h2>
+<div class="modlist-mods">
+  <% for mod in @removed %>
+    <%= render "mod", mod: mod, editable: false %>
+  <% end %>
+</div>
+
+<h2>Present in both</h2>
+<div class="modlist-mods">
+  <% for mod in @unchanged %>
+    <%= render "mod", mod: mod, editable: false %>
+  <% end %>
+</div>

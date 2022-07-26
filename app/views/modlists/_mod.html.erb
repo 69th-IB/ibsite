@@ -1,0 +1,50 @@
+<div class="mod">
+  <div class="thumbnail">
+    <%= image_tag mod.thumbnail.variant(:thumb) %>
+  </div>
+  <div class="content">
+    <div class="title">
+      <%= mod.title %>
+    </div>
+    <div class="details">
+      <%= link_to "Steam Workshop", mod.workshop_url, class: "workshop-link", target: "workshop" %>
+      &middot;
+      <%= number_to_human_size mod.file_size %>
+    </div>
+    <div class="spacer"></div>
+    <% if editable and policy(@modlist).update? %>
+      <div class="actions">
+        <label>
+          <%= tag.input \
+            type: "checkbox",
+            checked: mod.optional?,
+            data: {
+              id: mod.id,
+              action: "modlist#optional",
+            } %>
+          Optional
+        </label>
+        <label>
+          <%= tag.input \
+            type: "checkbox",
+            checked: mod.server_only?,
+            data: {
+              id: mod.id,
+              action: "modlist#serverOnly",
+            } %>
+          Server-only
+        </label>
+        <%= tag.button "Delete", data: {
+          id: mod.id,
+          action: "modlist#delete",
+        } %>
+        <%= tag.button "Restore",
+          class: "restore",
+          data: {
+            id: mod.mod_id,
+            action: "modlist#restore",
+          } %>
+      </div>
+    <% end %>
+  </div>
+</div>

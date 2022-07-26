@@ -1,2 +1,37 @@
-<h1>Modlists#show</h1>
-<p>Find me in app/views/modlists/show.html.erb</p>
+<p><%= link_to "<< Back to modlists overview", modlists_path %>
+
+<h1><%= @modlist.title %></h1>
+
+<% if @modlist.published? %>
+  <small title="<%= @modlist.published_at %>">
+    Published <%= time_ago_in_words @modlist.published_at %> ago
+  </small>
+<% else %>
+  <small title="<%= @modlist.created_at %>">
+    Created by <%= @modlist.creator.display_name %>, <%= time_ago_in_words @modlist.created_at %> ago
+  </small>
+<% end %>
+
+<% if policy(@modlist).update? %>
+  <%= form_with method: "PUT" do |f| %>
+    <%= f.text_field :workshop_id, placeholder: "Workshop ID" %>
+    <%= f.submit "Add mod" %>
+  <% end %>
+<% end %>
+
+<% if policy(@modlist).publish? %>
+  <%= button_to "Publish", publish_modlist_path(@modlist), method: :post %>
+<% end %>
+
+<% if policy(@modlist).destroy? %>
+  <%= button_to "Delete modlist", @modlist, method: :delete, data: { confirm: "Are you sure?" } %>
+<% end %>
+
+<div
+    class="modlist-mods"
+    data-controller="modlist"
+    data-modlist-id-value="<%= @modlist.id %>">
+  <% for mod in @mods %>
+    <%= render "mod", mod: mod, editable: true %>
+  <% end %>
+</div>

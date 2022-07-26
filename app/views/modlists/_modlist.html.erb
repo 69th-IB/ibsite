@@ -1,1 +1,8 @@
-<p><%= modlist.title %></p>
+<%= link_to modlist, class: "modlist" do %>
+  <% if !modlist.published? %>
+    <span class="draft">Draft</span>
+  <% end %>
+
+  <%= tag.span modlist.title,
+      class: "modlist-title" %>
+<% end %>

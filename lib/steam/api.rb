@@ -16,12 +16,12 @@ module Steam
 
     module PublishedFileService
       def self.get_details(published_file_id, **options)
-        Steam::API::request "IPublishedFileService/GetDetails/v1/", {
+        Steam::API::request("IPublishedFileService/GetDetails/v1/", {
           "publishedfileids[0]" => published_file_id,
           short_description: true,
           strip_description_bbcode: true,
           **options
-        }
+        }).dig("response", "publishedfiledetails")&.first
       end
 
       def self.query_files(query, **options)

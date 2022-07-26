@@ -5,6 +5,8 @@ class Mission < ApplicationRecord
 
   has_rich_text :description
 
+  has_one_attached :pbo_file
+
   # can't be public if it's a draft
   validates :public, exclusion: { in: [true], if: :draft? }
 
