@@ -35,4 +35,6 @@ Rails.application.routes.draw do
   get "/server", to: "manage_server#index", as: :manage_server
   post "/server/start", to: "manage_server#start", as: :manage_server_start
   post "/server/stop", to: "manage_server#stop", as: :manage_server_stop
+
+  resources :server_configs, only: [:index, :show, :edit, :update]
 end

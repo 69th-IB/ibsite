@@ -2,7 +2,12 @@ require "steam/api"
 
 class Modlist < ApplicationRecord
   belongs_to :creator, class_name: "User"
+
+  belongs_to :parent, class_name: "Modlist"
+  has_many :children, class_name: "Modlist", foreign_key: "parent_id"
+
   has_many :mods, class_name: "ModlistMod", dependent: :destroy
+
   has_rich_text :description
 
   def published? = published_at.present?

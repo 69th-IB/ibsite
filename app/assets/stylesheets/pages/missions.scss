@@ -1,157 +1,159 @@
 @import "misc/remixicon";
 
-.mission {
-  display: block;
-  text-decoration: none;
-  padding: 12px 24px;
-  background-color: #126341;
-  border: 1px solid rgba(white, 0.3);
-  border-radius: 4px;
-  margin-bottom: 12px;
-
-  transition: all 0.06s ease-in-out;
-
-  &:hover {
-    border-color: rgba(white, 0.8);
-  }
-
-  .mission-title {
+.controller-missions {
+  .mission {
     display: block;
-    font-size: 1.1em;
+    text-decoration: none;
+    padding: 12px 24px;
+    background-color: #126341;
+    border: 1px solid rgba(white, 0.3);
+    border-radius: 4px;
+    margin-bottom: 12px;
+
+    transition: all 0.06s ease-in-out;
+
+    &:hover {
+      border-color: rgba(white, 0.8);
+    }
+
+    .mission-title {
+      display: block;
+      font-size: 1.1em;
+    }
+
+    .mission-start {
+      display: block;
+      font-size: 0.9em;
+    }
   }
 
-  .mission-start {
-    display: block;
-    font-size: 0.9em;
+  .squad-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: start;
+    margin: 0 auto;
+    max-width: 100%;
   }
-}
 
-.squad-list {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: start;
-  margin: 0 auto;
-  max-width: 100%;
-}
+  .squad {
+    margin-top: 24px;
+  }
 
-.squad {
-  margin-top: 24px;
-}
-
-.squad-list > .squad {
-  flex-grow: 1;
-  border: 3px solid rgba(white, 0.2);
-  border-radius: 3px;
-  padding: 10px;
-  // padding-left: 20px;
-  margin: 24px 12px 0;
-  text-align: center;
-}
-
-.slots {
-  display: block;
-  min-width: 240px;
-  max-width: 300px;
-  list-style: none;
-  padding-left: 0;
-  margin: 0;
-  margin-top: 20px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.slot {
-  border: 1px solid #404040;
-  margin-bottom: -1px;
-  font-size: 0.9em;
-  font-weight: 600;
-  cursor: default;
-
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: start;
-
-  & > * {
-    flex: 1;
+  .squad-list > .squad {
+    flex-grow: 1;
+    border: 3px solid rgba(white, 0.2);
+    border-radius: 3px;
+    padding: 10px;
+    // padding-left: 20px;
+    margin: 24px 12px 0;
     text-align: center;
-    padding: 4px;
   }
 
-  .actions {
-    position: absolute;
-    top: 0;
-    bottom: 0;
+  .slots {
+    display: block;
+    min-width: 240px;
+    max-width: 300px;
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .slot {
+    border: 1px solid #404040;
+    margin-bottom: -1px;
+    font-size: 0.9em;
+    font-weight: 600;
+    cursor: default;
 
     display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: start;
 
-    & > a {
-      text-decoration: none;
-      display: block;
-      width: 32px;
-      border: none;
-      background: grey;
-      color: white;
-      font-size: 1.1em;
-      line-height: 1.4em;
-      cursor: pointer;
-      opacity: 0.8;
-
-      transition: opacity 0.05s ease-in-out;
-
-      &:hover {
-        opacity: 1;
-      }
-
-      &.radio { background-color: rgb(8, 133, 60); }
-      &.icon-add { background-color: #1f5ebb; @include remixicon('add-fill'); }
-      &.icon-remove { background-color: #a11717; @include remixicon('close-fill'); }
-      &.icon-edit { background-color: #1190da; @include remixicon('edit-fill'); }
-      &.icon-lock { background-color: #4b3232; @include remixicon('lock-fill'); }
+    & > * {
+      flex: 1;
+      text-align: center;
+      padding: 4px;
     }
-  }
-
-  .role {
-    position: relative;
-    border-right: inherit;
 
     .actions {
-      left: 0;
-      width: 100%;
-      justify-content: start;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+
+      display: flex;
 
       & > a {
-        width: 12px;
-        color: rgba(white, 0.0);
-        transition: all 0.1s ease-in-out;
-      }
-
-      &:hover > a {
+        text-decoration: none;
+        display: block;
         width: 32px;
+        border: none;
+        background: grey;
         color: white;
+        font-size: 1.1em;
+        line-height: 1.4em;
+        cursor: pointer;
+        opacity: 0.8;
+
+        transition: opacity 0.05s ease-in-out;
+
+        &:hover {
+          opacity: 1;
+        }
+
+        &.radio { background-color: rgb(8, 133, 60); }
+        &.icon-add { background-color: #1f5ebb; @include remixicon('add-fill'); }
+        &.icon-remove { background-color: #a11717; @include remixicon('close-fill'); }
+        &.icon-edit { background-color: #1190da; @include remixicon('edit-fill'); }
+        &.icon-lock { background-color: #4b3232; @include remixicon('lock-fill'); }
       }
     }
-  }
 
-  .player {
-    position: relative;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
+    .role {
+      position: relative;
+      border-right: inherit;
 
-    .actions {
-      right: 0;
-      width: 0px;
-      overflow: hidden;
-      justify-content: end;
+      .actions {
+        left: 0;
+        width: 100%;
+        justify-content: start;
 
-      transition: width 0.1s ease-in-out;
+        & > a {
+          width: 12px;
+          color: rgba(white, 0.0);
+          transition: all 0.1s ease-in-out;
+        }
+
+        &:hover > a {
+          width: 32px;
+          color: white;
+        }
+      }
     }
 
-    &:hover > .actions {
-      width: 100%;
+    .player {
+      position: relative;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+
+      .actions {
+        right: 0;
+        width: 0px;
+        overflow: hidden;
+        justify-content: end;
+
+        transition: width 0.1s ease-in-out;
+      }
+
+      &:hover > .actions {
+        width: 100%;
+      }
     }
   }
 }

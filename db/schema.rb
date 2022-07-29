@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_12_195951) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_26_130320) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -128,6 +128,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_12_195951) do
     t.string "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "title"
     t.index ["mission_id"], name: "index_server_configs_on_mission_id"
     t.index ["modlist_id"], name: "index_server_configs_on_modlist_id"
   end

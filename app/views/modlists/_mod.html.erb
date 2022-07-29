@@ -45,6 +45,10 @@
             action: "modlist#restore",
           } %>
       </div>
+    <% else %>
+      <% if mod.optional? %>
+        <div class="optional">Optional</div>
+      <% end %>
     <% end %>
   </div>
 </div>

@@ -2,14 +2,22 @@
 
 <h1><%= @modlist.title %></h1>
 
-<% if @modlist.published? %>
-  <small title="<%= @modlist.published_at %>">
-    Published <%= time_ago_in_words @modlist.published_at %> ago
-  </small>
-<% else %>
-  <small title="<%= @modlist.created_at %>">
-    Created by <%= @modlist.creator.display_name %>, <%= time_ago_in_words @modlist.created_at %> ago
-  </small>
+<p>
+  <% if @modlist.published? %>
+    <small title="<%= @modlist.published_at %>">
+      Published <%= time_ago_in_words @modlist.published_at %> ago
+    </small>
+  <% else %>
+    <small title="<%= @modlist.created_at %>">
+      Created by <%= @modlist.creator.display_name %>, <%= time_ago_in_words @modlist.created_at %> ago
+    </small>
+  <% end %>
+</p>
+
+<% if @modlist.parent.present? %>
+  <p>
+    <%= link_to "Compare with #{@modlist.parent.title}", diff_modlist_path(@modlist, @modlist.parent) %>
+  </p>
 <% end %>
 
 <% if policy(@modlist).update? %>

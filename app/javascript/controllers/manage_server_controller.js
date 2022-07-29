@@ -2,7 +2,12 @@ import { Controller } from "@hotwired/stimulus"
 import consumer from "channels/consumer"
 
 export default class extends Controller {
-  static targets = ["start", "stop", "validate"];
+  static targets = [
+    "mission", "missionLink", "modlist", "modlistLink",
+    "ws", "vn",
+    "headlessClients",
+    "start", "stop", "validate",
+  ];
 
   connect() {
     this.csrfToken = document.head.querySelector("meta[name=csrf-token]").attributes.content.value;
@@ -21,6 +26,71 @@ export default class extends Controller {
         if (data.state) {
           self.updateUIForState(data.state);
         }
+      },
+    });
+
+    this.missionTarget.addEventListener("change", this.updateMission.bind(this));
+    this.modlistTarget.addEventListener("change", this.updateModlist.bind(this));
+
+    this.wsTarget.addEventListener("change", this.updateCDLC.bind(this));
+    this.vnTarget.addEventListener("change", this.updateCDLC.bind(this));
+
+    this.headlessClientsTarget.addEventListener("change", this.updateHC.bind(this));
+  }
+
+  updateMission() {
+    let id = this.missionTarget.value;
+    this.updateServerConfig({
+      mission_id: id,
+    })
+
+    this.missionLinkTarget.href = `/missions/${id}/edit`;
+  }
+
+  updateModlist() {
+    let id = this.modlistTarget.value;
+
+    this.updateServerConfig({
+      modlist_id: id,
+    })
+
+    this.modlistLinkTarget.href = `/modlists/${id}`;
+  }
+
+  updateCDLC() {
+    let ws = this.wsTarget.checked;
+    let vn = this.vnTarget.checked;
+
+    let cdlc = [];
+    if (ws) cdlc.push("ws");
+    if (vn) cdlc.push("vn");
+
+    this.updateServerConfig({
+      creator_dlc: cdlc.join(";"),
+    })
+  }
+
+  updateHC() {
+    let hc = Math.max(0, parseInt(this.headlessClientsTarget.value));
+
+    if (isNaN(hc)) {
+      hc = 0;
+    }
+
+    this.headlessClientsTarget.value = hc;
+
+    this.updateServerConfig({
+      headless_clients: hc,
+    })
+  }
+
+  updateServerConfig(data) {
+    fetch("/server_configs/1", {
+      method: "PUT",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRF-Token": this.csrfToken,
       },
     });
   }
@@ -43,13 +113,15 @@ export default class extends Controller {
     });
   }
 
-  stop() {
-    fetch("/server/stop", {
+  async stop() {
+    await fetch("/server/stop", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         "X-CSRF-Token": this.csrfToken,
       },
     });
+
+    this.validateTarget.checked = false;
   }
 }

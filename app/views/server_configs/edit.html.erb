@@ -1,0 +1,7 @@
+<%= link_to "<< Back to server console", manage_server_path %>
+
+<h1>Server Config</h1>
+
+<div data-controller="server-config-editor" data-server-config-editor-id-value="<%= @server_config.id %>">
+  <div data-server-config-editor-target="editor"></div>
+</div>

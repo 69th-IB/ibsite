@@ -44,7 +44,7 @@ a:hover {
   color: #ffc107;
 }
 
-input[type="text"] {
+input[type="text"], input[type="number"] {
   background: black;
   border: 1px solid rgba(white, 0.6);
   border-radius: 2px;
@@ -110,6 +110,28 @@ button, input[type="submit"] {
 
   &:hover:not(:disabled) {
     background: #3f4f3f;
+    border-color: rgba(white, 0.6);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
+}
+
+select {
+  position: relative;
+  background: #2f352f; /* background applies to dropdown; bg image doesn't */
+  background-image: linear-gradient(to right, #2f352f, #2f352f);
+  border: 1px solid rgba(white, 0.2);
+  border-radius: 2px;
+  color: white;
+  padding: 6px 8px;
+  cursor: pointer;
+  transition: all 0.04s ease-in-out;
+
+  &:hover:not(:disabled) {
+    background-image: linear-gradient(to right, #3f4f3f, #3f4f3f);
     border-color: rgba(white, 0.6);
   }
 

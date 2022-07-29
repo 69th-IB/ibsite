@@ -1,0 +1,76 @@
+.controller-manage-server {
+  .quick-settings {
+    display: flex;
+    flex-direction: row;
+    margin-top: 24px;
+    margin-bottom: 24px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    border-top: 1px solid rgba(white, 0.3);
+    border-bottom: 1px solid rgba(white, 0.3);
+
+    & > * {
+      flex: 1;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: start;
+
+      padding-bottom: 2px;
+
+      h2 {
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+
+      &:not(:first-child) {
+        padding-left: 24px;
+        border-left: 1px solid rgba(white, 0.3);
+      }
+    }
+
+    .misc label {
+      display: block;
+
+      &:not(:last-child) {
+        margin-bottom: 4px;
+      }
+
+      &.headless-clients {
+        margin-top: 12px;
+
+      }
+    }
+  }
+
+  .button-bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-left: 0;
+    list-style: none;
+
+    & > * {
+      margin-right: 1rem;
+    }
+  }
+
+  padding-bottom: 32px;
+
+  .server-log {
+    margin-top: 32px;
+    padding: 16px;
+    border: 1px solid rgba(white, 0.3);
+    background: rgba(black, 0.6);
+    overflow-y: auto;
+    height: calc(100vh - 96px);
+
+    white-space: pre-wrap;
+    font-family: Hack, Menlo, Consolas, Monaco, Liberation Mono, Lucida Console, monospace;
+    font-size: 0.85em;
+    line-height: 1.3em;
+  }
+}

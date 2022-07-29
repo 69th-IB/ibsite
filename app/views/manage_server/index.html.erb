@@ -1,4 +1,68 @@
+<h1>Server Console</h1>
+
 <div data-controller="manage-server">
+  <div class="quick-settings">
+    <div class="mission">
+      <h2>Mission</h2>
+
+      <%= tag.select(data: { "manage-server-target": "mission" }) do %>
+        <% @missions.each do |m| %>
+          <%= tag.option \
+            m.title,
+            value: m.id,
+            selected: m == @selected_mission %>
+        <% end %>
+      <% end %>
+
+      <%= link_to "Edit mission to upload PBO file", edit_mission_path(@selected_mission), data: {
+        "manage-server-target": "missionLink",
+      } %>
+    </div>
+    <div class="modlist">
+      <h2>Modlist</h2>
+
+      <%= tag.select(data: { "manage-server-target": "modlist" }) do %>
+        <% @modlists.each do |m| %>
+          <%= tag.option \
+            m.title,
+            value: m.id,
+            selected: m == @selected_modlist %>
+        <% end %>
+      <% end %>
+
+      <%= link_to "View modlist", @selected_modlist, data: {
+        "manage-server-target": "modlistLink"
+      } %>
+    </div>
+    <div class="misc">
+      <label class="pointer">
+        <%= tag.input \
+          type: "checkbox",
+          checked: @server_config.ws?,
+          data: { "manage-server-target": "ws" } %>
+        Enable Western Sahara
+      </label>
+
+      <label class="pointer">
+        <%= tag.input \
+          type: "checkbox",
+          checked: @server_config.vn?,
+          data: { "manage-server-target": "vn" } %>
+        Enable Prairie Fire
+      </label>
+
+      <label class="pointer headless-clients">
+        <%= tag.input \
+          type: "text",
+          value: @server_config.headless_clients,
+          size: 1,
+          data: { "manage-server-target": "headlessClients" } %>
+
+        Headless clients
+      </label>
+    </div>
+  </div>
+
   <ul class="button-bar">
     <li>
       <button
@@ -26,4 +90,6 @@
       </label>
     </li>
   </ul>
+
+  <div class="server-log">live server log go here</div>
 </div>

@@ -76,7 +76,7 @@
       </div>
     </header>
 
-    <main>
+    <main class="controller-<%= controller_path.gsub(/_/, "-").gsub(/\//, "--") %>">
       <%= yield %>
     </main>
 
