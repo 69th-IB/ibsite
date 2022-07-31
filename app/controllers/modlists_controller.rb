@@ -31,6 +31,19 @@ class ModlistsController < ApplicationController
     @unchanged = @mods & @other_mods
   end
 
+  def preset
+    skip_authorization
+
+    @modlist = policy_scope(Modlist).find(params[:id])
+    @mods = @modlist.mods
+      .joins(:mod)
+      .order("mods.title")
+      .where("optional = ? OR server_only = ?", false, true)
+      .map(&:mod)
+
+    render layout: nil
+  end
+
   def create
     authorize Modlist
 

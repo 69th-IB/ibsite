@@ -45,9 +45,13 @@
             action: "modlist#restore",
           } %>
       </div>
-    <% else %>
-      <% if mod.optional? %>
+    <% elsif mod.is_a? ModlistMod %>
+      <% if mod.optional? and mod.server_only? %>
+        <div class="optional">Optional (Enabled on server)</div>
+      <% elsif mod.optional? %>
         <div class="optional">Optional</div>
+      <% elsif mod.server_only? %>
+        <div class="server-only">Server-only</div>
       <% end %>
     <% end %>
   </div>

@@ -4,7 +4,7 @@ class ModlistPolicy < ApplicationPolicy
       if user&.can? :manage_modlists
         scope.all
       else
-        scope.where published: true
+        scope.where.not published_at: nil
       end
     end
   end

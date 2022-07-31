@@ -7,6 +7,7 @@ export default class extends Controller {
     "ws", "vn",
     "headlessClients",
     "start", "stop", "validate",
+    "logOutput",
   ];
 
   connect() {
@@ -25,6 +26,21 @@ export default class extends Controller {
       received(data) {
         if (data.state) {
           self.updateUIForState(data.state);
+        }
+
+        if (data.log) {
+          let scroll = (self.logOutputTarget.scrollTopMax - self.logOutputTarget.scrollTop) <= 5;
+
+          self.logOutputTarget.innerHTML += data.log;
+
+          let logLength = self.logOutputTarget.innerHTML.length;
+          if (logLength > 100000) {
+            self.logOutputTarget.innerHTML = self.logOutputTarget.innerHTML.substring(logLength - 90000);
+          }
+
+          if (scroll) {
+            self.logOutputTarget.scrollTop = self.logOutputTarget.scrollTopMax;
+          }
         }
       },
     });
@@ -100,8 +116,10 @@ export default class extends Controller {
     this.stopTarget.disabled = state !== "started";
   }
 
-  start() {
-    fetch("/server/start", {
+  async start() {
+    this.startTarget.disabled = true;
+
+    let res = await fetch("/server/start", {
       method: "POST",
       body: JSON.stringify({
         validate: this.validateTarget.checked,
@@ -111,10 +129,16 @@ export default class extends Controller {
         "X-CSRF-Token": this.csrfToken,
       },
     });
+
+    if (!res.ok) {
+      this.startTarget.disabled = false;
+    }
   }
 
   async stop() {
-    await fetch("/server/stop", {
+    this.stopTarget.disabled = true;
+
+    let res = await fetch("/server/stop", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -122,6 +146,10 @@ export default class extends Controller {
       },
     });
 
-    this.validateTarget.checked = false;
+    if (!res.ok) {
+      this.stopTarget.disabled = false;
+    } else {
+      this.validateTarget.checked = false;
+    }
   }
 }

@@ -8,7 +8,7 @@ class ManageServerChannel < ApplicationCable::Channel
     stream_from :manage_server_channel
 
     transmit({
-      state: "stopped",
+      state: Arma::Server.instance.started? && "started" || "stopped",
     })
   end
 

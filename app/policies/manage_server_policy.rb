@@ -3,6 +3,10 @@ class ManageServerPolicy < ApplicationPolicy
     user&.can? :manage_server
   end
 
+  def logs?
+    user&.can? :manage_server
+  end
+
   def start?
     user&.can? :manage_server
   end

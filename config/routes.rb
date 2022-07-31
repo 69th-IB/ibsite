@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   resources :modlists, only: [:index, :show, :create, :update, :destroy]
   post "modlists/:id/publish", to: "modlists#publish", as: :publish_modlist
   get "modlists/:id/diff/:other_id", to: "modlists#diff", as: :diff_modlist
+  get "modlists/:id/preset", to: "modlists#preset", as: :modlist_preset
 
   namespace :user do
     get 'omniauth_callbacks/discord'
@@ -33,6 +34,7 @@ Rails.application.routes.draw do
   end
 
   get "/server", to: "manage_server#index", as: :manage_server
+  get "/server/logs", to: "manage_server#logs", as: :manage_server_logs
   post "/server/start", to: "manage_server#start", as: :manage_server_start
   post "/server/stop", to: "manage_server#stop", as: :manage_server_stop
 
