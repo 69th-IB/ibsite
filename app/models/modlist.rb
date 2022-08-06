@@ -3,7 +3,7 @@ require "steam/api"
 class Modlist < ApplicationRecord
   belongs_to :creator, class_name: "User"
 
-  belongs_to :parent, class_name: "Modlist"
+  belongs_to :parent, class_name: "Modlist", optional: true
   has_many :children, class_name: "Modlist", foreign_key: "parent_id"
 
   has_many :mods, class_name: "ModlistMod", dependent: :destroy

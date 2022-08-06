@@ -8,7 +8,8 @@ RUN apk add --no-cache \
     alpine-sdk \
     tzdata \
     libc6-compat \
-    libsodium
+    libsodium \
+    vips
 
 RUN gem install bundler
 RUN bundle config --global frozen 1
