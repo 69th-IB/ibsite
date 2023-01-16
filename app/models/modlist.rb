@@ -17,6 +17,14 @@ class Modlist < ApplicationRecord
       return false
     end
 
+    if mod = Mod.find_by(workshop_id: id)
+      assoc = ModlistMod.create(mod: mod)
+
+      self.mods << assoc
+      self.save!
+      return
+    end
+
     details = Steam::API::PublishedFileService::get_details(id)
 
     if details.nil? || details["result"] != 1

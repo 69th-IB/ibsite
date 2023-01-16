@@ -81,6 +81,13 @@ class ModlistsController < ApplicationController
     elsif params[:workshop_id].present?
       workshop_id = params[:workshop_id]
       @modlist.add_by_workshop_id(workshop_id)
+    elsif params[:modlist_html].present?
+      html_file = params[:modlist_html].read
+      ids = html_file.scan(/filedetails\/\?id=(\d+)/).map {|n| n.first.to_i}
+      ids.each do |id|
+        @modlist.add_by_workshop_id(id)
+      end
+      @modlist.save
     else
       @modlist.update(modlist_params)
     end

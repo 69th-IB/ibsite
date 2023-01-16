@@ -14,6 +14,25 @@
   <% end %>
 </p>
 
+<% if policy(@modlist).update? %>
+  <hr />
+  <%= form_with model: @modlist do |f| %>
+    <p>
+      <%= f.text_field :title, placeholder: @modlist.title %>
+      <%= f.submit "Update title" %>
+    </p>
+  <% end %>
+  <hr />
+  <h3>Add mods from HTML file</h3>
+  <%= form_with method: "PUT" do |f| %>
+    <p>
+      <%= f.file_field :modlist_html %>
+    </p>
+    <%= f.submit "Import" %>
+  <% end %>
+  <hr />
+<% end %>
+
 <% if @modlist.parent.present? %>
   <p>
     <%= link_to "Compare with #{@modlist.parent.title}", diff_modlist_path(@modlist, @modlist.parent) %>
@@ -22,8 +41,10 @@
 
 <% if policy(@modlist).update? %>
   <%= form_with method: "PUT" do |f| %>
-    <%= f.text_field :workshop_id, placeholder: "Workshop ID" %>
-    <%= f.submit "Add mod" %>
+    <p>
+      <%= f.text_field :workshop_id, placeholder: "Workshop ID" %>
+      <%= f.submit "Add mod" %>
+    </p>
   <% end %>
 <% end %>
 
@@ -32,7 +53,7 @@
 <% end %>
 
 <% if policy(@modlist).destroy? %>
-  <%= button_to "Delete modlist", @modlist, method: :delete, data: { confirm: "Are you sure?" } %>
+    <%= button_to "Delete modlist", @modlist, method: :delete, data: { confirm: "Are you sure?" } %>
 <% end %>
 
 <div

@@ -1,6 +1,6 @@
 class ModlistMod < ApplicationRecord
-  belongs_to :modlist, dependent: :destroy
-  belongs_to :mod, dependent: :destroy
+  belongs_to :modlist
+  belongs_to :mod
   has_rich_text :notes
 
   def title = mod.title
