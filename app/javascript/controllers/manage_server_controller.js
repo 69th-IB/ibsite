@@ -4,7 +4,7 @@ import consumer from "channels/consumer"
 export default class extends Controller {
   static targets = [
     "mission", "missionLink", "modlist", "modlistLink",
-    "ws", "vn",
+    "ws", "vn", "spe",
     "headlessClients",
     "start", "stop", "validate",
     "logOutput",
@@ -50,6 +50,7 @@ export default class extends Controller {
 
     this.wsTarget.addEventListener("change", this.updateCDLC.bind(this));
     this.vnTarget.addEventListener("change", this.updateCDLC.bind(this));
+    this.speTarget.addEventListener("change", this.updateCDLC.bind(this));
 
     this.headlessClientsTarget.addEventListener("change", this.updateHC.bind(this));
   }
@@ -76,10 +77,12 @@ export default class extends Controller {
   updateCDLC() {
     let ws = this.wsTarget.checked;
     let vn = this.vnTarget.checked;
+    let spe = this.vnTarget.checked;
 
     let cdlc = [];
     if (ws) cdlc.push("ws");
     if (vn) cdlc.push("vn");
+    if (spe) cdlc.push("spe");
 
     this.updateServerConfig({
       creator_dlc: cdlc.join(";"),

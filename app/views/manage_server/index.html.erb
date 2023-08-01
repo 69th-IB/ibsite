@@ -51,6 +51,14 @@
         Enable Prairie Fire
       </label>
 
+      <label class="pointer">
+        <%= tag.input \
+          type: "checkbox",
+          checked: @server_config.spe?,
+          data: { "manage-server-target": "spe" } %>
+        Enable Spearhead 1944
+      </label>
+
       <label class="pointer headless-clients">
         <%= tag.input \
           type: "text",
