@@ -84,8 +84,14 @@ export default class extends Controller {
     if (vn) cdlc.push("vn");
     if (spe) cdlc.push("spe");
 
+    let branch = "profiling";
+    if (cdlc.length > 0) {
+      branch = "creatordlc";
+    }
+
     this.updateServerConfig({
       creator_dlc: cdlc.join(";"),
+      branch: branch,
     })
   }
 
