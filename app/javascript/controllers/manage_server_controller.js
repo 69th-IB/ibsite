@@ -77,7 +77,7 @@ export default class extends Controller {
   updateCDLC() {
     let ws = this.wsTarget.checked;
     let vn = this.vnTarget.checked;
-    let spe = this.vnTarget.checked;
+    let spe = this.speTarget.checked;
 
     let cdlc = [];
     if (ws) cdlc.push("ws");
