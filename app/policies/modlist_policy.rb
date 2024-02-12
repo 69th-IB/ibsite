@@ -26,7 +26,7 @@ class ModlistPolicy < ApplicationPolicy
   end
 
   def update?
-    user&.can?(:manage_modlists) && !record.published?
+    user&.can?(:manage_modlists)
   end
 
   def publish?
@@ -34,6 +34,6 @@ class ModlistPolicy < ApplicationPolicy
   end
 
   def destroy?
-    user&.can?(:manage_modlists) && !record.published?
+    user&.can?(:manage_modlists)
   end
 end
