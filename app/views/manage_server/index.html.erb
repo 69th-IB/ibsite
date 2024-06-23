@@ -59,6 +59,14 @@
         Enable Spearhead 1944
       </label>
 
+      <label class="pointer">
+        <%= tag.input \
+          type: "checkbox",
+          checked: @server_config.gm?,
+          data: { "manage-server-target": "gm" } %>
+        Enable Global Mobilization
+      </label>
+
       <label class="pointer headless-clients">
         <%= tag.input \
           type: "text",

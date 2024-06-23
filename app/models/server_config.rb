@@ -9,4 +9,5 @@ class ServerConfig < ApplicationRecord
   def vn? = cdlc.any?("vn")
   def ws? = cdlc.any?("ws")
   def spe? = cdlc.any?("spe")
+  def gm? = cdlc.any?("gm")
 end
