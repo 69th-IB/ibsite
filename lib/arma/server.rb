@@ -73,6 +73,7 @@ EOF
       ],
       HostConfig: {
         AutoRemove: true,
+        SecurityOpt: ["seccomp=unconfined"],
         Binds: [
           "#{volume_path}:/arma3",
           "#{cfgfile.path}:/arma3/configs/69th.cfg",
