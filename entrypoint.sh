@@ -2,6 +2,8 @@
 
 set -e
 
+rm -f tmp/pids/server.pid
+
 # default to 'server'
 CMD="${@:-server}"
 
